@@ -20,6 +20,7 @@ public class OrderController {
         this.template = template;
     }
 
+    @CrossOrigin
     @GetMapping("/order/todayOrders")
     @ResponseBody
     public String GetOrders(HttpServletResponse httpServletResponse,
@@ -52,6 +53,7 @@ public class OrderController {
         return "{ \"errorMessage\" : \"Token invalid\" } ";
     }
 
+    @CrossOrigin
     @PostMapping("/order/create")
     @ResponseBody
     public String CreateOrder(@RequestHeader("token") String token,
@@ -76,6 +78,7 @@ public class OrderController {
         return "{ \"errorMessage\" : \"Token invalid\" } ";
     }
 
+    @CrossOrigin
     @PostMapping("/order/remove")
     @ResponseBody
     public String RemoveOrder(@RequestHeader("token") String token,

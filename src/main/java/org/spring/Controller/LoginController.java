@@ -30,6 +30,7 @@ public class LoginController {
         return "Hello eater";
     }
 
+    @CrossOrigin
     @PostMapping("/register")
     @ResponseBody
     public String Register(@RequestParam("username") String username,
@@ -79,6 +80,7 @@ public class LoginController {
         return "{ \"errorMessage\" : \"Account is not exists\" }";
     }
 
+    @CrossOrigin
     @PostMapping("/password/change")
     @ResponseBody
     public String Login(@RequestParam("oPassword") String oPassword,
