@@ -1,0 +1,12 @@
+server:
+  context-path: /
+  port: ${PORT:12345}
+
+spring:
+  jpa:
+  datasource:
+    username: ${MYSQL_USERNAME:dev}
+    password: ${MYSQL_PASSWORD:dev}
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:eaterdb}?useSSL=false
+    connection-init-sql: 'SELECT 1'
+spring.se

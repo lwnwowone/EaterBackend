@@ -1,0 +1,9 @@
+applications:
+- name : samplejar
+  path : build/libs/gs-spring-boot-0.1.0.jar
+  env:
+    SPRING_PROFILES_ACTIVE: prod
+  
+- name : static
+  path : static
+  memory: 64M

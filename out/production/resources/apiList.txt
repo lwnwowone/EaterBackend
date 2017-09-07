@@ -1,0 +1,44 @@
+错误示例:
+	
+{ "errorMessage" : "Original password is incorrect" }
+
+API列表:
+
+注册
+HTTP Method: POST
+地址:/register
+参数:username(string) string(string)
+成功的返回:{ "token" : "8bc5e768ca33418281900662f1f788d3" }
+ 
+登录
+HTTP Method: POST
+地址:/login
+参数:username(string) string(string)
+成功的返回:{ "token" : "8bc5e768ca33418281900662f1f788d3" }
+
+修改密码
+HTTP Method: POST
+地址:/password/change
+参数:username(string) string(string)
+成功的返回:空
+
+订餐
+HTTP Method: POST
+地址: /order/create
+头: token(string)
+参数:无
+成功的返回:空
+
+取消订餐
+HTTP Method: POST
+地址: /order/remove
+头: token(string)
+参数:无
+成功的返回:空
+
+查询当天订单列表
+HTTP Method: GET
+地址: /order/todayOrders
+头: token(string)
+参数:无
+成功的返回:{ "orderList" : [{"OrderID" : "5","Username" : "liuwennan","OrderTime" : "111015","OrderDate" : "201796"},{"OrderID" : "6","Username" : "liuwennan2","OrderTime" : "113047","OrderDate" : "201796"},{"OrderID" : "7","Username" : "liuwennan3","OrderTime" : "113135","OrderDate" : "201796"}] }
