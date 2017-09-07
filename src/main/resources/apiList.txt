@@ -22,6 +22,13 @@ HTTP Method: POST
 参数:username(string) string(string)
 成功的返回:空
 
+个人资料
+HTTP Method: GET
+地址: /profile
+头: token(string)
+参数:无
+成功的返回:{ "username" : "liuwennan", "nickname" : "", "department" : "", "hasOrdered : "true" }
+
 订餐
 HTTP Method: POST
 地址: /order/create
@@ -35,6 +42,13 @@ HTTP Method: POST
 头: token(string)
 参数:无
 成功的返回:空
+
+查询是否已订餐
+HTTP Method: GET
+地址: /hasOrdered
+头: token(string)
+参数:无
+成功的返回:{ "result" : "true" }
 
 查询当天订单列表
 HTTP Method: GET

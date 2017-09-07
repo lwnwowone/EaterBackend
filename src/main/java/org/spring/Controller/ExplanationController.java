@@ -26,7 +26,6 @@ public class ExplanationController {
             // do something
             String lineTxt = null;
             while ((lineTxt = reader.readLine()) != null) {
-//                System.out.println(lineTxt);
                 apiList += lineTxt + "\n";
             }
             reader.close();

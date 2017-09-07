@@ -29,7 +29,7 @@ public class OrderController {
         if(!token.isEmpty() && !username.isEmpty()) {
             String currentDate = GetCurrentDate();
             try {
-                List<Map<String, Object>> result = template.queryForList("SELECT * from UserOrders Where OrderDate = ?", new Object[]{currentDate});
+                List<Map<String, Object>> result = template.queryForList("SELECT * from UserOrders Where OrderDate = ? AND Alive = ?", new Object[]{currentDate,1});
                 if (result.size() > 0) {
                     List<Order> orderList = new ArrayList<>();
                     for (Map<String,Object> tMap : result){
@@ -89,7 +89,7 @@ public class OrderController {
             List<Map<String, Object>> result = template.queryForList("SELECT * from UserOrders Where Username = ? AND OrderDate = ?", new Object[]{username,currentDate});
             if (result.size() > 0) {
                 try {
-                    template.update("DELETE FROM UserOrders WHERE Username = ? ", new Object[]{username});
+                    template.update("UPDATE UserOrders SET Alive = ? WHERE Username = ?",new Object[]{0,username});
                     return "";
                 } catch (Exception ex) {
                     httpServletResponse.setStatus(400);
