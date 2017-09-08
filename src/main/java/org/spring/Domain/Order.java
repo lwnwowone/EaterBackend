@@ -21,6 +21,16 @@ public class Order {
         Username = username;
     }
 
+    private String UserNickname;
+
+    public String getUserNickname() {
+        return UserNickname;
+    }
+
+    public void setUserNickname(String userNickname) {
+        UserNickname = userNickname;
+    }
+
     private String OrderTime;
 
     public String getOrderTime() {

@@ -1,6 +1,7 @@
 package org.spring.Controller;
 
 import org.spring.Domain.Order;
+import org.spring.Domain.User;
 import org.springframework.http.HttpHeaders;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,7 @@ public class OrderController {
                         Order tOrder = new Order();
                         tOrder.setOrderID(tMap.get("OrderID").toString());
                         tOrder.setUsername(tMap.get("Username").toString());
+                        tOrder.setUserNickname(tMap.get("UserNickname").toString());
                         tOrder.setOrderTime(tMap.get("OrderTime").toString());
                         tOrder.setOrderDate(tMap.get("OrderDate").toString());
                         orderList.add(tOrder);
@@ -68,7 +70,7 @@ public class OrderController {
                     return "{ \"errorMessage\" : \"Order has exists\" }";
                 }
                 String currentTime = GetCurrentTime();
-                template.update("INSERT INTO UserOrders (Username,OrderTime,OrderDate) VALUES (?,?,?)", new Object[]{username, currentTime, currentDate});
+                template.update("INSERT INTO UserOrders (Username,UserNickname,OrderTime,OrderDate) VALUES (?,?,?,?)", new Object[]{username, GetUserNicknameFromToken(token), currentTime, currentDate});
                 return "";
             } catch (Exception ex) {
                 httpServletResponse.setStatus(400);
@@ -102,6 +104,21 @@ public class OrderController {
         return "{ \"errorMessage\" : \"Token invalid\" } ";
     }
 
+    private String GetUserNicknameFromToken(String token){
+        String result = null;
+        try{
+            List<Map<String,Object>> qResult = template.queryForList("SELECT * from User Where AvailableToken = ?",new Object[]{token});
+            if(qResult.size() > 0) {
+                Map<String, Object> obj0 = qResult.get(0);
+                result = obj0.get("Nickname").toString();
+            }
+            return result;
+        }
+        catch (Exception ex){
+            return result;
+        }
+    }
+
     private String GetUsernameFromToken(String token){
         String result = "";
         try{
@@ -123,6 +140,7 @@ public class OrderController {
             String ObjectJson = "{";
             ObjectJson += "\"OrderID\" : \"" + tOrder.getOrderID() + "\",";
             ObjectJson += "\"Username\" : \"" + tOrder.getUsername() + "\",";
+            ObjectJson += "\"UserNickname\" : \"" + tOrder.getUserNickname() + "\",";
             ObjectJson += "\"OrderTime\" : \"" + tOrder.getOrderTime() + "\",";
             ObjectJson += "\"OrderDate\" : \"" + tOrder.getOrderDate() + "\"";
             ObjectJson += "}";
