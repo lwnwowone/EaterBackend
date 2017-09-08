@@ -64,7 +64,7 @@ public class OrderController {
         if(!token.isEmpty() && !username.isEmpty()) {
             String currentDate = GetCurrentDate();
             try {
-                List<Map<String, Object>> result = template.queryForList("SELECT * from UserOrders Where Username = ? AND OrderDate = ?", new Object[]{username,currentDate});
+                List<Map<String, Object>> result = template.queryForList("SELECT * from UserOrders Where Username = ? AND OrderDate = ? AND Alive = 1", new Object[]{username,currentDate});
                 if (result.size() > 0) {
                     httpServletResponse.setStatus(400);
                     return "{ \"errorMessage\" : \"Order has exists\" }";
