@@ -27,7 +27,14 @@ HTTP Method: GET
 地址: /profile
 头: token(string)
 参数:无
-成功的返回:{ "username" : "liuwennan", "nickname" : "", "department" : "", "hasOrdered : "true" }
+成功的返回:{ "username" : "liuwennan", "nickname" : "刘文楠", "department" : "技术部", "hasOrdered : "true" }
+
+个人资料
+HTTP Method: POST
+地址: /profile/modify
+头: token(string)
+参数:nickname(string) department(string)
+成功的返回:无
 
 订餐
 HTTP Method: POST
