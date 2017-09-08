@@ -137,37 +137,30 @@ public class OrderController {
 
     private String GetCurrentDate(){
         Calendar now = Calendar.getInstance();
-        System.out.println("年: " + now.get(Calendar.YEAR));
-        System.out.println("月: " + (now.get(Calendar.MONTH) + 1) + "");
-        System.out.println("日: " + now.get(Calendar.DAY_OF_MONTH));
-        System.out.println("时: " + now.get(Calendar.HOUR_OF_DAY));
-        System.out.println("分: " + now.get(Calendar.MINUTE));
-        System.out.println("秒: " + now.get(Calendar.SECOND));
-        System.out.println("当前时间毫秒数：" + now.getTimeInMillis());
-        System.out.println(now.getTime());
 
         int year = now.get(Calendar.YEAR);
         int month = now.get(Calendar.MONTH) + 1;
         int day = now.get(Calendar.DAY_OF_MONTH);
 
-        return String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
+        String result = FixedStringValueOf(year) + FixedStringValueOf(month) + FixedStringValueOf(day);
+        return result;
     }
 
     private String GetCurrentTime(){
         Calendar now = Calendar.getInstance();
-        System.out.println("年: " + now.get(Calendar.YEAR));
-        System.out.println("月: " + (now.get(Calendar.MONTH) + 1) + "");
-        System.out.println("日: " + now.get(Calendar.DAY_OF_MONTH));
-        System.out.println("时: " + now.get(Calendar.HOUR_OF_DAY));
-        System.out.println("分: " + now.get(Calendar.MINUTE));
-        System.out.println("秒: " + now.get(Calendar.SECOND));
-        System.out.println("当前时间毫秒数：" + now.getTimeInMillis());
-        System.out.println(now.getTime());
 
         int hour = now.get(Calendar.HOUR_OF_DAY);
         int minute = now.get(Calendar.MINUTE);
         int second = now.get(Calendar.SECOND);
 
-        return String.valueOf(hour) + String.valueOf(minute) + String.valueOf(second);
+        String result = FixedStringValueOf(hour) + FixedStringValueOf(minute) + FixedStringValueOf(second);
+        return result;
+    }
+
+    private String FixedStringValueOf(int intValue){
+        String result = String.valueOf(intValue);
+        if(1 == result.length())
+            result = "0" + result;
+        return result;
     }
 }
