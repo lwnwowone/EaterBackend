@@ -62,7 +62,7 @@ public class UserController {
                 String department = resultMap.get("Department").toString();
                 String hasOrdered = HasOrderedLocal(token);
                 hasOrdered = hasOrdered.contains("true") ? "true" : "false";
-                return "{ \"username\" : \"" + username + "\", \"nickname\" : \"" + nickname + "\", \"department\" : \"" + department + "\", \"hasOrdered : \"" + hasOrdered + "\" }";
+                return "{ \"username\" : \"" + username + "\", \"nickname\" : \"" + nickname + "\", \"department\" : \"" + department + "\", \"hasOrdered\" : \"" + hasOrdered + "\" }";
             }
             httpServletResponse.setStatus(400);
             return "{ \"errorMessage\" : \"Account is not exists\" }";
