@@ -88,7 +88,7 @@ public class OrderController {
         String username = GetUsernameFromToken(token);
         if(!token.isEmpty() && !username.isEmpty()) {
             String currentDate = GetCurrentDate();
-            List<Map<String, Object>> result = template.queryForList("SELECT * from UserOrders Where Username = ? AND OrderDate = ?", new Object[]{username,currentDate});
+            List<Map<String, Object>> result = template.queryForList("SELECT * from UserOrders Where Username = ? AND OrderDate = ? AND Alive = 1", new Object[]{username,currentDate});
             if (result.size() > 0) {
                 try {
                     template.update("UPDATE UserOrders SET Alive = ? WHERE Username = ?",new Object[]{0,username});
