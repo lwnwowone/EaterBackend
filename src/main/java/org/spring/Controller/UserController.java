@@ -109,7 +109,7 @@ public class UserController {
                 Map<String,Object> resultMap = result.get(0);
                 String username = resultMap.get("Username").toString();
                 try {
-                    result = template.queryForList("SELECT * FROM UserOrders WHERE Username = ?",new Object[]{username});
+                    result = template.queryForList("SELECT * FROM UserOrders WHERE Username = ? AND Alive = 1",new Object[]{username});
                     return (result.size() > 0) ? "{ \"result\" : \"true\" }" : "{ \"result\" : \"false\" }";
                 }
                 catch(Exception ex){
