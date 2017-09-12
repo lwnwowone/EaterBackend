@@ -19,12 +19,12 @@ public class UserController {
     }
 
     @CrossOrigin
-    @PostMapping("/password/change")
+    @PutMapping("/password/change")
     @ResponseBody
-    public String Login(@RequestParam("oPassword") String oPassword,
-                        @RequestParam("nPassword") String nPassword,
-                        @RequestHeader("token") String token,
-                        HttpServletResponse httpServletResponse){
+    public String ChangePassword(@RequestParam("oPassword") String oPassword,
+                                 @RequestParam("nPassword") String nPassword,
+                                 @RequestHeader("token") String token,
+                                 HttpServletResponse httpServletResponse){
         if(!token.isEmpty()) {
             List<Map<String,Object>> result = template.queryForList("SELECT * from User Where AvailableToken = ?",new Object[]{token});
             if(result.size() > 0){
