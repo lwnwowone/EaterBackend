@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     @CrossOrigin
-    @PutMapping("/password/change")
+    @PostMapping("/password/change")
     @ResponseBody
     public String Login(@RequestParam("oPassword") String oPassword,
                         @RequestParam("nPassword") String nPassword,
@@ -109,7 +110,7 @@ public class UserController {
                 Map<String,Object> resultMap = result.get(0);
                 String username = resultMap.get("Username").toString();
                 try {
-                    result = template.queryForList("SELECT * FROM UserOrders WHERE Username = ? AND Alive = 1",new Object[]{username});
+                    result = template.queryForList("SELECT * FROM UserOrders WHERE Username = ? AND OrderDate = ? AND Alive = 1",new Object[]{username,GetCurrentDate()});
                     return (result.size() > 0) ? "{ \"result\" : \"true\" }" : "{ \"result\" : \"false\" }";
                 }
                 catch(Exception ex){
@@ -119,5 +120,23 @@ public class UserController {
             return "{ \"errorMessage\" : \"Account is not exists\" }";
         }
         return "{ \"errorMessage\" : \"Token invalid\" } ";
+    }
+
+    private String GetCurrentDate(){
+        Calendar now = Calendar.getInstance();
+
+        int year = now.get(Calendar.YEAR);
+        int month = now.get(Calendar.MONTH) + 1;
+        int day = now.get(Calendar.DAY_OF_MONTH);
+
+        String result = FixedStringValueOf(year) + FixedStringValueOf(month) + FixedStringValueOf(day);
+        return result;
+    }
+
+    private String FixedStringValueOf(int intValue){
+        String result = String.valueOf(intValue);
+        if(1 == result.length())
+            result = "0" + result;
+        return result;
     }
 }
