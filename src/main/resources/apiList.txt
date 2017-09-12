@@ -17,9 +17,9 @@ HTTP Method: POST
 成功的返回:{ "token" : "8bc5e768ca33418281900662f1f788d3" }
 
 修改密码
-HTTP Method: POST
+HTTP Method: PUT
 地址:/password/change
-参数:username(string) string(string)
+参数:oPassword(string) nPassword(string)
 成功的返回:空
 
 个人资料
