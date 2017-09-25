@@ -40,6 +40,7 @@ public class OrderController {
                         tOrder.setUserNickname(tMap.get("UserNickname").toString());
                         tOrder.setOrderTime(tMap.get("OrderTime").toString());
                         tOrder.setOrderDate(tMap.get("OrderDate").toString());
+                        tOrder.setOrderedItem(tMap.get("OrderedItem").toString());
                         orderList.add(tOrder);
                     }
                     String orderListJson = ToJsonString(orderList);
@@ -58,7 +59,8 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/order/create")
     @ResponseBody
-    public String CreateOrder(@RequestHeader("token") String token,
+    public String CreateOrder(@RequestParam(required = false, name = "orderedItem") String orderedItem,
+                              @RequestHeader("token") String token,
                               HttpServletResponse httpServletResponse){
         String username = GetUsernameFromToken(token);
         if(!token.isEmpty() && !username.isEmpty()) {
@@ -70,7 +72,9 @@ public class OrderController {
                     return "{ \"errorMessage\" : \"Order has exists\" }";
                 }
                 String currentTime = GetCurrentTime();
-                template.update("INSERT INTO UserOrders (Username,UserNickname,OrderTime,OrderDate) VALUES (?,?,?,?)", new Object[]{username, GetUserNicknameFromToken(token), currentTime, currentDate});
+                if(null == orderedItem)
+                    orderedItem = "";
+                template.update("INSERT INTO UserOrders (Username,UserNickname,OrderTime,OrderDate,OrderedItem) VALUES (?,?,?,?,?)", new Object[]{username, GetUserNicknameFromToken(token), currentTime, currentDate,orderedItem});
                 return "";
             } catch (Exception ex) {
                 httpServletResponse.setStatus(400);
@@ -142,7 +146,8 @@ public class OrderController {
             ObjectJson += "\"Username\" : \"" + tOrder.getUsername() + "\",";
             ObjectJson += "\"UserNickname\" : \"" + tOrder.getUserNickname() + "\",";
             ObjectJson += "\"OrderTime\" : \"" + tOrder.getOrderTime() + "\",";
-            ObjectJson += "\"OrderDate\" : \"" + tOrder.getOrderDate() + "\"";
+            ObjectJson += "\"OrderDate\" : \"" + tOrder.getOrderDate() + "\",";
+            ObjectJson += "\"OrderedItem\" : \"" + tOrder.getOrderedItem() + "\"";
             ObjectJson += "}";
             result += ObjectJson + ",";
         }

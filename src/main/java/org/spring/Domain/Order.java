@@ -31,6 +31,16 @@ public class Order {
         UserNickname = userNickname;
     }
 
+    private String OrderedItem;
+
+    public String getOrderedItem() {
+        return OrderedItem;
+    }
+
+    public void setOrderedItem(String orderedItem) {
+        OrderedItem = orderedItem;
+    }
+
     private String OrderTime;
 
     public String getOrderTime() {

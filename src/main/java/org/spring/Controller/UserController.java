@@ -59,11 +59,12 @@ public class UserController {
             if(result.size() > 0){
                 Map<String,Object> resultMap = result.get(0);
                 String username = resultMap.get("Username").toString();
+                String access = resultMap.get("UserAccess").toString();
                 String nickname = resultMap.get("Nickname").toString();
                 String department = resultMap.get("Department").toString();
                 String hasOrdered = HasOrderedLocal(token);
                 hasOrdered = hasOrdered.contains("true") ? "true" : "false";
-                return "{ \"username\" : \"" + username + "\", \"nickname\" : \"" + nickname + "\", \"department\" : \"" + department + "\", \"hasOrdered\" : \"" + hasOrdered + "\" }";
+                return "{ \"username\" : \"" + username + "\", \"access \" : \"" + access + "\", \"nickname\" : \"" + nickname + "\", \"department\" : \"" + department + "\", \"hasOrdered\" : \"" + hasOrdered + "\" }";
             }
             httpServletResponse.setStatus(400);
             return "{ \"errorMessage\" : \"Account is not exists\" }";

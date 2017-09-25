@@ -79,6 +79,8 @@ public class LoginController {
                     return "{ \"errorMessage\" : \"DataBase error\" }";
                 }
             }
+            httpServletResponse.setStatus(400);
+            return "{ \"errorMessage\" : \"Incorrect password\" }";
         }
         httpServletResponse.setStatus(400);
         return "{ \"errorMessage\" : \"Account is not exists\" }";
