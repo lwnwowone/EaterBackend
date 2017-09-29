@@ -40,7 +40,7 @@ HTTP Method: POST
 HTTP Method: POST
 地址: /order/create
 头: token(string)
-参数:无
+参数:orderedItem(string)
 成功的返回:空
 
 取消订餐
