@@ -48,6 +48,7 @@ public class MenuController {
                 return "{ \"errorMessage\" : \"Operation failed, error message is : " + ex.getMessage() + "\" } ";
             }
         }
+        httpServletResponse.setStatus(400);
         return "{ \"errorMessage\" : \"Access denied\" } ";
     }
 
@@ -68,6 +69,7 @@ public class MenuController {
                 return "{ \"errorMessage\" : \"Operation failed, error message is : " + ex.getMessage() + "\" } ";
             }
         }
+        httpServletResponse.setStatus(400);
         return "{ \"errorMessage\" : \"Access denied\" } ";
     }
 
@@ -92,6 +94,7 @@ public class MenuController {
             httpServletResponse.setStatus(400);
             return "{ \"errorMessage\" : \"Item is not exists \" }";
         }
+        httpServletResponse.setStatus(400);
         return "{ \"errorMessage\" : \"Access denied\" } ";
     }
 
@@ -116,6 +119,7 @@ public class MenuController {
             httpServletResponse.setStatus(400);
             return "{ \"errorMessage\" : \"Item is not exists(available) \" }";
         }
+        httpServletResponse.setStatus(400);
         return "{ \"errorMessage\" : \"Access denied\" } ";
     }
 
